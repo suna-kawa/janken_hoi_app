@@ -27,32 +27,34 @@ elsif cpu_hand == 0 && player_hand == 1 ||
     
 elsif cpu_hand == 3 || player_hand == 3 || cpu_hand == 3 && player_hand == 3
     puts "終了"
+    exit
 
 else
     puts "ゲームオーバー"
+    exit
     end
 end
+
 
 # あっち向いてホイ
 
 def acchimuite_hoi(cpu_hand, player_hand, cpu_win: 'CPU', player_win: 'PLAYER')
+
     if cpu_hand == player_hand && cpu_win == "CPU"
         puts "勝者はAIです"
-        return false
+        return true
 
     elsif cpu_hand == player_hand && player_win == "PLAYER"
         puts "勝者はあなたです"
-        return false
+        return true
 
     else
-        return 
+        return true
     end
 end
 
-
-
-
-# while
+# while　trueの間繰り返す
+# falseになったら処理を抜ける
 janken_result = true
 while janken_result
     puts "0(グー)1(チョキ)2(パー)3(戦わない)"
@@ -68,8 +70,8 @@ while janken_result
     janken_result = janken(cpu_hand, player_hand, cpu_win: 'CPU', player_win: 'PLAYER')
 end
 
-
-# until
+# until falseの間繰り返す
+# trueになったら処理を抜ける
 ahm_game = false
 until ahm_game
     puts "あっち向いて〜"
@@ -84,5 +86,7 @@ until ahm_game
     puts "相手  : #{acms[cpu_hand]}"
     puts "----------"
     ahm_game = acchimuite_hoi(cpu_hand, player_hand, cpu_win: 'CPU', player_win: 'PLAYER')
+    # redo if cpu_hand != player_hand
+    # janken(cpu_hand, player_hand, cpu_win: 'CPU', player_win: 'PLAYER')
 end
 
