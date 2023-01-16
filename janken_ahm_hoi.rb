@@ -47,18 +47,18 @@ def acchimuite_hoi(cpu_hand, player_hand, cpu_win: 'CPU', player_win: 'PLAYER')
     elsif cpu_hand == player_hand && player_win == "PLAYER"
         puts "勝者はあなたです"
         return true
-
+        
     else
         return true
     end
 end
 
-# while　trueの間繰り返す
-# falseになったら処理を抜ける
+while true
+
 janken_result = true
 while janken_result
     puts "0(グー)1(チョキ)2(パー)3(戦わない)"
-    player_hand = gets.to_i # 内包してるのは入力した番号
+    player_hand = gets.to_i 
     cpu_hand = rand(4)
 
     jankens = ["グー", "チョキ", "パー", "戦わない"]
@@ -70,8 +70,7 @@ while janken_result
     janken_result = janken(cpu_hand, player_hand, cpu_win: 'CPU', player_win: 'PLAYER')
 end
 
-# until falseの間繰り返す
-# trueになったら処理を抜ける
+
 ahm_game = false
 until ahm_game
     puts "あっち向いて〜"
@@ -86,7 +85,9 @@ until ahm_game
     puts "相手  : #{acms[cpu_hand]}"
     puts "----------"
     ahm_game = acchimuite_hoi(cpu_hand, player_hand, cpu_win: 'CPU', player_win: 'PLAYER')
-    # redo if cpu_hand != player_hand
-    # janken(cpu_hand, player_hand, cpu_win: 'CPU', player_win: 'PLAYER')
+    end
+    
+    if cpu_hand == player_hand
+        break
+    end
 end
-
