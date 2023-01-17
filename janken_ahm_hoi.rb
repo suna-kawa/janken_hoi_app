@@ -2,7 +2,7 @@
 
 puts "じゃんけん..."
 
-def janken(cpu_hand, player_hand, cpu_win: 'CPU', player_win: 'PLAYER')
+def janken(cpu_hand, player_hand, cpu_win, player_win)
 
 if cpu_hand == player_hand
     puts "あいこで"
@@ -16,17 +16,15 @@ elsif player_hand == 0 && cpu_hand == 1 ||
     player_win
     return false
 
-    
 elsif cpu_hand == 0 && player_hand == 1 ||
     cpu_hand == 1 && player_hand == 2 ||
     cpu_hand == 2 && player_hand == 0
     puts "相手の勝ちです"
     cpu_win
     return false
-
     
-elsif cpu_hand == 3 || player_hand == 3 || cpu_hand == 3 && player_hand == 3
-    puts "終了"
+elsif player_hand == 3
+    puts "棄権"
     exit
 
 else
@@ -35,19 +33,18 @@ else
     end
 end
 
-
 # あっち向いてホイ
 
-def acchimuite_hoi(cpu_hand, player_hand, cpu_win: 'CPU', player_win: 'PLAYER')
+def acchimuite_hoi(cpu_hand, player_hand, cpu_win, player_win)
 
-    if cpu_hand == player_hand && cpu_win == "CPU"
+    if cpu_hand == player_hand && cpu_win == 'CPU'
         puts "勝者はAIです"
-        return true
-
-    elsif cpu_hand == player_hand && player_win == "PLAYER"
-        puts "勝者はあなたです"
-        return true
+        return false
         
+    elsif cpu_hand == player_hand && player_win == 'PLAYER'
+        puts "勝者はあなたです"
+        return false
+
     else
         return true
     end
@@ -56,23 +53,26 @@ end
 while true
 
 janken_result = true
-while janken_result
+while janken_result 
     puts "0(グー)1(チョキ)2(パー)3(戦わない)"
     player_hand = gets.to_i 
-    cpu_hand = rand(4)
+    cpu_hand = rand(3)
 
-    jankens = ["グー", "チョキ", "パー", "戦わない"]
+    jankens = ["グー", "チョキ", "パー"]
     puts "ホイ!"
     puts "----------"
     puts "あなた: #{jankens[player_hand]}を出しました"
     puts "相手  : #{jankens[cpu_hand]}を出しました"
     puts "----------"
-    janken_result = janken(cpu_hand, player_hand, cpu_win: 'CPU', player_win: 'PLAYER')
+    janken_result = janken(cpu_hand, player_hand, 'CPU', 'PLAYER')
+    
+    if cpu_hand != player_hand
+        break
+    end
 end
 
-
-ahm_game = false
-until ahm_game
+# ahm_game = true
+# while ahm_game
     puts "あっち向いて〜"
     puts "0(上) 1(下) 2(左) 3(右)"
     player_hand = gets.to_i
@@ -84,9 +84,8 @@ until ahm_game
     puts "あなた: #{acms[player_hand]}"
     puts "相手  : #{acms[cpu_hand]}"
     puts "----------"
-    ahm_game = acchimuite_hoi(cpu_hand, player_hand, cpu_win: 'CPU', player_win: 'PLAYER')
-    end
-    
+    ahm_game = acchimuite_hoi(cpu_hand, player_hand, 'CPU', 'PLAYER')
+
     if cpu_hand == player_hand
         break
     end
